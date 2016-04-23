@@ -90,13 +90,18 @@ gulp.task 'watch', ['build'], ->
 gulp.task 'clean', ->
   del.sync dir.build
 
+gulp.task 'copy', ->
+  gulp
+    .src dir.src + "CNAME"
+    .pipe gulp.dest dir.build
+
 gulp.task 'deploy', ->
   gulp
     .src dir.build + "**/*"
     .pipe ghpages()
 
 gulp.task 'build', ->
-  runSequence 'clean', ['scss', 'webpack', 'images', 'jade']
+  runSequence 'clean', ['copy', 'scss', 'webpack', 'images', 'jade']
 
 gulp.task 'default', ->
   gulp.start 'build'
