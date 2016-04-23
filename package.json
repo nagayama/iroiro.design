@@ -4,8 +4,9 @@
   "description": "iroiro.design",
   "main": "index.js",
   "scripts": {
-    "start": "gulp watch --development",
-    "build": "gulp build"
+    "start":  "gulp watch --development",
+    "build":  "gulp build",
+    "deploy": "gulp build && gulp deploy"
   },
   "author": "iroirodesign",
   "license": "UNLICENCED",
