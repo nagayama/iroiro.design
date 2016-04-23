@@ -90,7 +90,7 @@ gulp.task 'watch', ['build'], ->
 gulp.task 'clean', ->
   del.sync dir.build
 
-gulp.task 'deploy', ['build'], ->
+gulp.task 'deploy', ->
   gulp
     .src dir.build + "**/*"
     .pipe ghpages()
