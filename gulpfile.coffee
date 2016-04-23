@@ -48,7 +48,7 @@ gulp.task 'scss', ->
 
 gulp.task 'webpack', ->
   gulp
-    .src dir.src+"scripts/main.coffee"
+    .src dir.src+"scripts/main.js"
     .pipe webpack
       devtool: 'source-map'
       recursive: true
@@ -56,10 +56,10 @@ gulp.task 'webpack', ->
         filename: "main.js"
       module:
         loaders: [
-          test: /\.coffee$/, loader: "coffee"
+          test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"
         ]
       resolve:
-        extentions: ["", ".coffee", ".js"]
+        extentions: ["", ".js"]
     .pipe gulp.dest dir.build+"scripts/"
   
 gulp.task 'images', ->
