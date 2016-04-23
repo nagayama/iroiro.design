@@ -13,6 +13,7 @@ postcss    = require('gulp-postcss')
 csso       = require('gulp-csso')
 imagemin   = require('gulp-imagemin')
 sourcemaps = require('gulp-sourcemaps')
+ghpages    = require('gulp-gh-pages')
 
 dir =
   build: "./build/"
@@ -89,8 +90,14 @@ gulp.task 'watch', ['build'], ->
 gulp.task 'clean', ->
   del.sync dir.build
 
-gulp.task 'build', (cb) ->
-  runSequence 'clean', ['scss', 'webpack', 'images', 'jade'], cb
+gulp.task 'deploy', ['build'], ->
+  gulp
+    .src dir.build + "**/*"
+    .pipe ghpages()
+
+gulp.task 'build', ->
+  runSequence 'clean', ['scss', 'webpack', 'images', 'jade']
 
 gulp.task 'default', ->
   gulp.start 'build'
+
